@@ -1,4 +1,4 @@
-(async () => {
+async function main() {
   const BASE = location.origin + "/stdt/list_questionnaire";
 
   let attend = 0;
@@ -35,4 +35,4 @@
     `欠席: ${absent}\n` +
     `出席率: ${rate}%`
   );
-})();
+};
