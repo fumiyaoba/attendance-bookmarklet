@@ -4,6 +4,21 @@ async function main() {
   let attend = 0;
   let absent = 0;
 
+  const status = document.createElement("div");
+  status.style.cssText = `
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    padding:10px 14px;
+    background:#333;
+    color:#fff;
+    font-size:14px;
+    z-index:99999;
+    border-radius:6px;
+  `;
+  status.textContent = "出席率集計中…";
+  document.body.appendChild(status);
+
   const getLastPage = async () => {
     const html = await fetch(BASE).then(r => r.text());
     const doc = new DOMParser().parseFromString(html, "text/html");
@@ -15,6 +30,8 @@ async function main() {
   const lastPage = await getLastPage();
 
   for (let page = 1; page <= lastPage; page++) {
+    status.textContent = `出席率集計中… ${page}/${lastPage} ページ`;
+
     const url = page === 1 ? BASE : `${BASE}?page=${page}`;
     const html = await fetch(url).then(r => r.text());
     const doc = new DOMParser().parseFromString(html, "text/html");
@@ -27,6 +44,8 @@ async function main() {
     });
   }
 
+  status.remove();
+
   const total = attend + absent;
   const rate = total ? ((attend / total) * 100).toFixed(2) : "0.00";
 
@@ -36,4 +55,4 @@ async function main() {
     `欠席: ${absent}\n` +
     `出席率: ${rate}%`
   );
-};
+}
