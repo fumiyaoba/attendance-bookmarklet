@@ -39,12 +39,8 @@ async function main() {
     doc.querySelectorAll("table.underline tbody tr").forEach(tr => {
       const tds = tr.querySelectorAll("td");
       const comment = tds[4].innerText.trim();
-
-      if (comment === "") {
-        absent++;
-      } else {
-        attend++;
-      }
+      if (comment === "") {absent++; }
+      else { attend++; }
     });
   }
 
