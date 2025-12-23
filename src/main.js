@@ -20,9 +20,10 @@ async function main() {
     const doc = new DOMParser().parseFromString(html, "text/html");
 
     doc.querySelectorAll("table.underline tbody tr").forEach(tr => {
-      const result = tr.querySelectorAll("td")[2].innerText.trim();
-      if (result === "出席") attend++;
-      if (result === "欠席") absent++;
+      const tds = tr.querySelectorAll("td");
+      const comment = tds[4].innerText.trim();
+      if (comment === "") {absent++; }
+      else { attend++; }
     });
   }
 
