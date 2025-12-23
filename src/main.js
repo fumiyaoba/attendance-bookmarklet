@@ -50,7 +50,7 @@ async function main() {
   const rate = total ? ((attend / total) * 100).toFixed(2) : "0.00";
 
   alert(
-    `出席率集計結果（コメント基準）\n\n` +
+    `出席率集計結果\n\n` +
     `出席: ${attend}\n` +
     `欠席: ${absent}\n` +
     `出席率: ${rate}%`
